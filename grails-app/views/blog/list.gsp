@@ -16,10 +16,9 @@
 	</g:form>
 	<g:form action="list">
 		Page: <g:select name="page" from="${1..pages}" value="${page}"
-			noSelection="['1':'-Page-']"
-			onchange="this.form.submit()" />
+			noSelection="['1':'-Page-']" onchange="this.form.submit()" />
 
-		<g:field type="hidden" value="${tag }" name="tag"/>
+		<g:field type="hidden" value="${tag }" name="tag" />
 	</g:form>
 	<div id="postList">
 		<g:each in="${posts}" var="post">
@@ -27,6 +26,12 @@
 			<h1>
 				${post.title}
 			</h1>
+
+			<g:if test="${post.tag}">
+				<h3>
+					Tag: <g:field value="${post.tag }" disabled="" type="text" name="tag" />
+				</h3>
+			</g:if>
 			<p class="lead">
 				By <span class="text-info"> ${post.email}
 				</span> on

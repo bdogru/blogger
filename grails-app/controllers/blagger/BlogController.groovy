@@ -14,13 +14,11 @@ class BlogController {
 		} else {
 			params.tag = params.tag.trim()
 		}
-		println params
 		Integer page = params.page
 		Integer offset = 0
 		if(page != null && page > 0) {
 			offset = (page-1) * params.max
 		}
-		println offset + " " + params.tag
 		def liste = Post.createCriteria().list(max: params.max, offset: offset) {
 			if(StringUtils.isNotBlank(params.tag)) {
 				like("tag", params.tag+"%")
@@ -32,16 +30,17 @@ class BlogController {
 		if (pages < 1) {
 			pages = 1
 		}
-//        [posts: Post.list().sort { lhs, rhs -> rhs.id <=> lhs.id }]
-		println liste
-		println pages
-		println params.page
-		println params.tag
         [posts: liste, pages: pages, page:params.page, tag:params.tag]
     }
 
     def create(params) {
-        [post: new Post(params)]
+		def tags = Post.createCriteria().list {
+			projections {
+				distinct("tag")
+			}
+		}
+		println tags
+        [post: new Post(params), tags: tags]
     }
 
     def createPost() {
