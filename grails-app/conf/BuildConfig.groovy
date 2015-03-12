@@ -63,7 +63,8 @@ grails.project.dependency.resolution = {
 		runtime ":database-migration:1.2.1"
 
 		compile ':cache:1.0.1'
-//		compile ":jmesa:2.0.4-SNAPSHOT-0.1"
+//		compile ":jquery-ui:1.10.4"
+//		compile ":remote-pagination:0.4.8"
 
 //		test(":spock:0.7-SNAPSHOT") 
 //		{ 
